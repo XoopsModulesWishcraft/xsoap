@@ -2,7 +2,28 @@
 
 
 function viewretrieve_xsd(){
-
+	$xsd = array();
+	$i=0;
+	$data = array();
+			$data[] = array("name" => "username", "type" => "string");
+			$data[] = array("name" => "password", "type" => "string");	
+			$data[] = array("name" => "viewname", "type" => "string");
+			$data[] = array("name" => "id", "type" => "integer");			
+			$data[] = array("name" => "clause", "type" => "string");
+	$datab=array();
+		$datab[] = array("name" => "field", "type" => "string");
+			$data[] = array("items" => array("data" => $datab, "objname" => "data"));
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
+	
+	$xsd['response'][] = array("name" => "total_records", "type" => "double");
+	$data = array();
+		$data[] = array("name" => "field", "type" => "string");
+		$data[] = array("name" => "value", "type" => "string");		
+	$i++;
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objname'] = 'data';
+	return $xsd;
 }
 
 function viewretrieve_wsdl(){

@@ -1,14 +1,21 @@
 <?
 
 function tablesforretrieve_xsd(){
-	$xsd = array();
-	$xsd['request'][] = array("name" => "username", "type" => "string");
-	$xsd['request'][] = array("name" => "password", "type" => "string");
-
-	$xsd['response'][] = array("name" => "id", "type" => "integer");
-	$xsd['response'][] = array("name" => "table", "type" => "string");
-
-	return $xsd;
+	$xsd=array();
+	$i=0;
+	$data = array();
+		$data[] = array("name" => "username", "type" => "string");
+		$data[] = array("name" => "password", "type" => "string");
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
+	
+	$data=array();
+		$data[] = array("name" => "id", "type" => "integer");
+		$data[] = array("name" => "table", "type" => "string");
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objnames'] = 'items';
+	
+	return $xsd;	
 }
 
 function tablesforretrieve_wsdl(){

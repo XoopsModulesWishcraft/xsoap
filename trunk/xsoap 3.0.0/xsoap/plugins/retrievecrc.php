@@ -2,18 +2,22 @@
 function retrievecrc_xsd(){
 	$xsd = array();
 	$i=0;
-	$xsd['request'][$i] = array("name" => "username", "type" => "string");
-	$xsd['request'][$i] = array("name" => "password", "type" => "string");	
-	$xsd['request'][$i++] = array("name" => "tablename", "type" => "string");
-	$xsd['request'][$i++] = array("name" => "clause", "type" => "string");	
+	$data = array();
+			$data[] = array("name" => "username", "type" => "string");
+			$data[] = array("name" => "password", "type" => "string");	
+			$data[] = array("name" => "tablename", "type" => "string");
+			$data[] = array("name" => "clause", "type" => "string");
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
 
 	$xsd['response'][] = array("name" => "id", "type" => "double");
 	$xsd['response'][] = array("name" => "crc", "type" => "string");
 	$data = array();
 		$data[] = array("name" => "field", "type" => "string");
 		$data[] = array("name" => "crc", "type" => "string");		
-	$xsd['response'][$i++]['items'] = $data;
-	
+		$i++;
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objname'] = 'data';
 	return $xsd;
 }
 

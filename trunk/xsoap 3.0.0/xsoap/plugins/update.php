@@ -1,19 +1,25 @@
 <?
 
 function update_xsd(){
-$xsd = array();
+	$xsd = array();
 	$i=0;
-	$xsd['request'][$i] = array("name" => "username", "type" => "string");
-	$xsd['request'][$i] = array("name" => "password", "type" => "string");	
-	$xsd['request'][$i++] = array("name" => "tablename", "type" => "string");
+	$data_a=array();
+		$data_a[$i] = array("name" => "username", "type" => "string");
+		$data_a[$i++] = array("name" => "password", "type" => "string");
+		$data_a[$i++] = array("name" => "tablename", "type" => "string");
 	$data = array();
 		$data[] = array("name" => "field", "type" => "string");
-		$data[] = array("name" => "value", "type" => "string");		
-	$xsd['request'][$i++]['items'] = $data;
-
-	$xsd['response'][] = array("name" => "result", "type" => "integer");
+		$data[] = array("name" => "value", "type" => "string");
+	$i++;
+		$data_a[$i]['items']['data'] = $data;
+		$data_a[$i]['items']['objname'] = 'data';
+	$i=0;
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';
+	$xsd['response'][] = array("name" => "result", "type" => "double");
 	
 	return $xsd;
+
 }
 
 function update_wsdl(){

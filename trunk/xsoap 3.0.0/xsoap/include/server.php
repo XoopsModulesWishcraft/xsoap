@@ -2,26 +2,51 @@
 
 global $xoopsModuleConfig,$xoopsModule;
 
-if (!define("SOAP_1_2")&&!define("SOAP_1_1")) {
-	define('SOAPLIB','NUSOAP');
-	require_once('nusoap/nusoap.php');
+if (!file_exists(XOOPS_ROOT_PATH.'/class/soap/xoopssoap.php')){
+	foreach (get_loaded_extensions() as $ext){
+		if ($ext=="soap"){
+			$native=true;
+		}
+	}
+	
+	if ($native!=true) {
+		define('SOAPLIB','NUSOAP');
+		require_once('nusoap/nusoap.php');
+	} else {
+		define('SOAPLIB','INHERIT');
+	}
 } else {
-	define('SOAPLIB','INHERIT');
+	require_once (XOOPS_ROOT_PATH.'/class/soap/xoopssoap.php');
 }
 
 require_once(XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->dirname().'/class/class.functions.php');
 require_once('common.php');
 
-if ($xoopsModuleConfig['wsdl']==1){
-	if (!isset($_GET['wsdl'])) {
-		$server = new soap_server(XOOPS_URL."/modules/xsoap/xsoap.wsdl.services.php");
-	} else {
-		$server = new soap_server(XOOPS_URL."/modules/xsoap/xsoap.wsdl.service.php?funcname=".$_GET['wsdl']);
+	switch(SOAPLIB){
+	case "NUSOAP":
+		if ($xoopsModuleConfig['wsdl']==1){
+			if (!isset($_GET['wsdl'])) {
+				$server = new soap_server("xsoap.wsdl");
+			} else {
+				$server = new soap_server($_GET['wsdl'].'.service.wsdl');
+			}
+		} else {
+			$server = new soap_server();
+		}
+		break;
+	case "INHERIT":
+		if ($xoopsModuleConfig['wsdl']==1){
+			if (!isset($_GET['wsdl'])) {
+				$server = new SoapServer("xsoap.wsdl");
+			} else {
+				$server = new SoapServer($_GET['wsdl'].'.service.wsdl');
+			}
+		} else {
+			$server = new SoapServer();
+		}
+		break;
 	}
-} else {
-	$server = new soap_server();
-}
-
+	
 
 $funct = new FunctionsHandler($xoopsModuleConfig['wsdl']);
 
@@ -43,7 +68,7 @@ foreach($FunctionDefine as $function){
 	if (function_exists($function)){
 		switch(SOAPLIB){
 		case "NUSOAP":
-			$server->register($function);
+			$server->register($function,array(),array(),XOOP_URL."/modules/xsoap/wdsl/$function");
 			break;
 		case "INHERIT":
 			$server->addFunction($function);

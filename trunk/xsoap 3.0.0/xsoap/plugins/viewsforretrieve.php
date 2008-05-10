@@ -1,8 +1,20 @@
 <?
 function viewsforretrieve_xsd(){
-	$xsd = array();
-	$xsd['request'][$i] = array("name" => "", "type" => "");
-	$i++;
+		$xsd=array();
+	$i=0;
+	$data = array();
+		$data[] = array("name" => "username", "type" => "string");
+		$data[] = array("name" => "password", "type" => "string");
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
+	
+	$data=array();
+		$data[] = array("name" => "id", "type" => "integer");
+		$data[] = array("name" => "view", "type" => "string");
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objnames'] = 'items';
+	
+	return $xsd;	
 }
 
 function viewsforretrieve_wsdl(){
@@ -26,7 +38,7 @@ function viewsforretrieve($var) {
 	while ($row = $xoopsDB->fetchArray($ret)){
 		$t++;
 		$rtn[$t] = array( 'id' => $row['tbl_id'],
-						'table' => $row['tablename']);
+						'view' => $row['tablename']);
 	}
 
 	global $xoopsModuleConfig;

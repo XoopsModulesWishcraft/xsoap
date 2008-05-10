@@ -7,7 +7,7 @@
  * Author: WF-Sections
  * Licence: GNU
  */
- 
+ error_reporting(E_ALL);
 include '../../../mainfile.php';
 include '../../../include/cp_header.php';
 include '../include/functions.php';

@@ -269,7 +269,11 @@ case "saveplugins":
 		}
 	
 	}
-	redirect_header("index.php?op=plugins",2,"Database Updated");
+	if (!compile_wsdl()){
+		redirect_header("index.php?op=plugins",2,"Database Updated - Error Compiling WSDL");
+	} else {
+		redirect_header("index.php?op=plugins",2,"Database Updated - Complete Compile of WSDL");
+	}
 	break;
 
 case "plugins":
@@ -296,6 +300,7 @@ xoops_cp_header();
 adminmenu();
 ?>
 </p>
+Warning: You must have Anonymous access and fopen enabled to open URL's to build the WSDL. You will require anonymous access to the x-soap module to access it and use the soap service.
 <form action='index.php' method='post'>
 <table width="100%" border="0" cellspacing="0">
   <tr class="head">
@@ -455,5 +460,38 @@ function get_tablename($tableid){
 	return $row['tablename'];
 }
 
+function compile_wsdl(){
+	
+	global $xoopsDB;
+	ini_set('allow_url_fopen',true);
+	$sql = "SELECT * FROM ".$xoopsDB->prefix('soap_plugins')." WHERE active = 1";
+	$ret = $xoopsDB->queryF($sql);
+	while ($row = $xoopsDB->fetchArray($ret)){
+		
+		WSDL_dump_File(XOOPS_URL."/modules/xsoap/xsoap.xsd.php?local=1&funcname=".$row['plugin_name'],XOOPS_ROOT_PATH."/modules/xsoap/".$row['plugin_name'].".xsd");
+		
+		WSDL_dump_File(XOOPS_URL."/modules/xsoap/xsoap.wsdl.php?local=1&funcname=".$row['plugin_name'],XOOPS_ROOT_PATH."/modules/xsoap/".$row['plugin_name'].".wsdl");
+			
+		WSDL_dump_File(XOOPS_URL."/modules/xsoap/xsoap.wsdl.service.php?local=1&funcname=".$row['plugin_name'],XOOPS_ROOT_PATH."/modules/xsoap/".$row['plugin_name'].".service.wsdl");
+			
+	}
+	
+	WSDL_dump_File(XOOPS_URL."/modules/xsoap/xsoap.wsdl.services.php?local=1",XOOPS_ROOT_PATH."/modules/xsoap/xsoap.wsdl");
+	
+	return filesize(XOOPS_ROOT_PATH."/modules/xsoap/xsoap.wsdl");
+}
 
+function WSDL_dump_File($URLXMLFile, $dest){
+    if(!empty($URLXMLFile)){
+        if($fo = fopen($URLXMLFile, 'r')){
+			$fout = fopen($dest, 'w');
+            $source = '';
+            while (!feof($fo)) {
+               fwrite($fout,fgets($fo));
+            }
+			fclose($fout);
+            fclose($fo);
+        }
+    }
+}
 ?>

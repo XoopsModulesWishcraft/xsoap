@@ -3,14 +3,19 @@
 function post_xsd(){
 	$xsd = array();
 	$i=0;
-	$xsd['request'][$i] = array("name" => "username", "type" => "string");
-	$xsd['request'][$i++] = array("name" => "password", "type" => "string");
-	$xsd['request'][$i++] = array("name" => "tablename", "type" => "string");
+	$data_a=array();
+		$data_a[$i] = array("name" => "username", "type" => "string");
+		$data_a[$i++] = array("name" => "password", "type" => "string");
+		$data_a[$i++] = array("name" => "tablename", "type" => "string");
 	$data = array();
 		$data[] = array("name" => "field", "type" => "string");
 		$data[] = array("name" => "value", "type" => "string");
-	$xsd['request'][$i++]['items'] = $data;
-
+	$i++;
+		$data_a[$i]['items']['data'] = $data;
+		$data_a[$i]['items']['objname'] = 'data'
+	$i=0;
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';
 	$xsd['response'][] = array("name" => "insert_id", "type" => "double");
 	
 	return $xsd;

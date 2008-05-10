@@ -1,27 +1,32 @@
 <?
 
 function tableschemer_xsd(){
-	$xsd = array();
-	$xsd['request'][] = array("name" => "username", "type" => "string");
-	$xsd['request'][] = array("name" => "password", "type" => "string");
-	$xsd['request'][] = array("name" => "update", "type" => "integer");
-	$xsd['request'][] = array("name" => "post", "type" => "integer");
-	$xsd['request'][] = array("name" => "retrieve", "type" => "integer");
-	$xsd['request'][] = array("name" => "tablename", "type" => "string");
+	$xsd=array();
+	$i=0;
+	$data = array();
+		$data[] = array("name" => "username", "type" => "string");
+		$data[] = array("name" => "password", "type" => "string");
+		$data[] = array("name" => "update", "type" => "integer");
+		$data[] = array("name" => "post", "type" => "integer");
+		$data[] = array("name" => "retrieve", "type" => "integer");
+		$data[] = array("name" => "tablename", "type" => "string");			
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
 	
-
-	$xsd['response'][] = array("name" => "table_id", "type" => "integer");
-	$xsd['response'][] = array("name" => "field", "type" => "string");
-	$xsd['response'][] = array("name" => "allowpost", "type" => "integer");
-	$xsd['response'][] = array("name" => "allowretrieve", "type" => "integer");
-	$xsd['response'][] = array("name" => "allowupdate", "type" => "integer");
-	$xsd['response'][] = array("name" => "string", "type" => "integer");
-	$xsd['response'][] = array("name" => "int", "type" => "integer");
-	$xsd['response'][] = array("name" => "float", "type" => "integer");
-	$xsd['response'][] = array("name" => "text", "type" => "integer");
-	$xsd['response'][] = array("name" => "other", "type" => "integer");
-	$xsd['response'][] = array("name" => "key", "type" => "integer");
-					
+	$data=array();
+		$data[] = array("name" => "table_id", "type" => "integer");
+		$data[] = array("name" => "field", "type" => "string");
+		$data[] = array("name" => "allowpost", "type" => "integer");
+		$data[] = array("name" => "allowretrieve", "type" => "integer");
+		$data[] = array("name" => "allowupdate", "type" => "integer");
+		$data[] = array("name" => "string", "type" => "integer");
+		$data[] = array("name" => "int", "type" => "integer");
+		$data[] = array("name" => "float", "type" => "integer");
+		$data[] = array("name" => "text", "type" => "integer");
+		$data[] = array("name" => "other", "type" => "integer");
+		$data[] = array("name" => "key", "type" => "integer");
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objnames'] = 'items';					
 	return $xsd;
 }
 

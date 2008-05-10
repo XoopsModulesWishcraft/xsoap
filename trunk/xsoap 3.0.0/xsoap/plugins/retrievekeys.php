@@ -3,15 +3,25 @@
 function retrievekeys_xsd(){
 	$xsd = array();
 	$i=0;
-	$xsd['request'][$i] = array("name" => "username", "type" => "string");
-	$xsd['request'][$i] = array("name" => "password", "type" => "string");	
-	$xsd['request'][$i++] = array("name" => "tablename", "type" => "string");
-	$xsd['request'][$i++] = array("name" => "clause", "type" => "string");	
+	$data = array();
+			$data[] = array("name" => "username", "type" => "string");
+			$data[] = array("name" => "password", "type" => "string");	
+			$data[] = array("name" => "tablename", "type" => "string");
+			$data[] = array("name" => "clause", "type" => "string");
+			$data[] = array("name" => "fieldid", "type" => "integer");			
+			$data[] = array("name" => "tablename", "type" => "string");
+			$data[] = array("name" => "id", "type" => "integer");			
+	$xsd['request'][$i]['items']['data'] = $data;
+	$xsd['request'][$i]['items']['objname'] = 'var';	
 
 	$data = array();
-		$data[] = array("name" => "field", "type" => "string");
-		$data[] = array("name" => "value", "type" => "string");		
-	$xsd['response'][$i++]['items'] = $data;
+		$data[] = array("name" => "id", "type" => "integer");
+	$data_b = array();
+		$data_b[] = array("name" => "field", "type" => "string");
+		$data_b[] = array("name" => "value", "type" => "string");		
+		$data[] = array("items" => array("data" => $data_b, "objname" => "data"));		
+	$xsd['response'][$i]['items']['data'] = $data;
+	$xsd['response'][$i]['items']['objnames'] = 'items';
 	
 	return $xsd;
 }
