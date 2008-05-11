@@ -26,7 +26,7 @@
 
 
 $modversion['name']		    = 'x-Soap';
-$modversion['version']		= 2.3;
+$modversion['version']		= 3.0;
 $modversion['releasedate'] = "Wed: 15 March 2008";
 $modversion['status'] = "Stable";
 $modversion['author'] = "Chronolabs Australia";
