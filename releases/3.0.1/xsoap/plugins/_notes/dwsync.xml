@@ -13,4 +13,8 @@
 <file name="post.php" server="ftp.unseen.org.au//public_html/" local="128548132885171250" remote="128547668400000000" />
 <file name="index.html" server="ftp.unseen.org.au//public_html/" local="128500255880000000" remote="128547665400000000" />
 <file name="xoops_authentication.php" server="ftp.unseen.org.au//public_html/" local="128546981853946250" remote="128547665400000000" />
+<file name="xoops_user_validate.php" server="ftp.unseen.org.au//public_html/" local="128550167622587500" remote="128549663400000000" />
+<file name="xoops_network_disclaimer.php" server="ftp.unseen.org.au//public_html/" local="128550102409447500" remote="128549598000000000" />
+<file name="xoops_create_user.php" server="ftp.unseen.org.au//public_html/" local="128550152288751250" remote="128549651400000000" />
+<file name="xoops_check_activation.php" server="ftp.unseen.org.au//public_html/" local="128550122090112500" remote="128549617800000000" />
 </dwsync>

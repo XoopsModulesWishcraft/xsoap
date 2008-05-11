@@ -51,17 +51,17 @@ require_once('common.php');
 $funct = new FunctionsHandler($xoopsModuleConfig['wsdl']);
 
 $FunctionDefine = array();
-global $xoopsDB;
-$sql = "SELECT * FROM ".$xoopsDB->prefix('soap_plugins'). " where active = 1";
-$ret = $xoopsDB->queryF($sql);
-
-while($row = $xoopsDB->fetchArray($ret)){
-
-	require_once(XOOPS_ROOT_PATH.'/modules/xsoap/plugins/'.$row['plugin_file']);
-	$FunctionDefine[] = $row['plugin_name'];
-
-	
+foreach($funct->GetServerExtensions() as $extension){
+	global $xoopsDB;
+	$sql = "SELECT count(*) rc FROM ".$xoopsDB->prefix('soap_plugins'). " where active = 1 and plugin_file = '".$extension."'";
+	$ret = $xoopsDB->query($sql);
+	$row = $xoopsDB->fetchArray($ret);
+	if ($row['rc']==1){
+		require_once(XOOPS_ROOT_PATH.'/modules/xsoap/plugins/'. $extension);
+		$FunctionDefine[] = substr( $extension,0,strlen( $extension)-4);
+	}	
 }
+
 $FunctionDefine = array_unique($FunctionDefine);
 
 foreach($FunctionDefine as $function){

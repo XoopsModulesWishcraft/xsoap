@@ -54,7 +54,7 @@
 		global $xoopsModuleConfig, $xoopsConfig;
 		if ($xoopsModuleConfig['site_user_auth']==1){
 			if (!checkright(basename(__FILE__),$username,$password))
-				return array('ErrNum'=> 9, "ErrDesc" => sprintf('No Permission for plug-in - %s, %s',$username,$password));
+				return array('ErrNum'=> 9, "ErrDesc" => 'No Permission for plug-in');
 		}
 
 		if ($auth['passhash']!=''){
