@@ -1,0 +1,10 @@
+AddType application/x-httpd-php .wsdl
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^wsdl/([a-zA-Z0-9\_\-]+)/definitions xsoap.wsdl.php?funcname=$1 [L,NC,QSA]
+RewriteRule ^wsdl/([a-zA-Z0-9\_\-]+)/schemas xsoap.xsd.php?funcname=$1 [L,NC,QSA]
+RewriteRule ^wsdl/([a-zA-Z0-9\_\-]+)/service xsoap.wsdl.service.php?funcname=$1  [L,NC,QSA]
+RewriteRule ^wsdl/([a-zA-Z0-9\_\-]+) xsoap.wsdl.service.php?funcname=$1 [L,NC,QSA]

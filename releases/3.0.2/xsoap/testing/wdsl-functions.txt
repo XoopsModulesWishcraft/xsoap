@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+=== tablesforpost - Function ===
+
+'''tablesforpost''' is a a SOAP function that retrieves the tables that can be inserted into on the service for new data submission to the database
+
+==== tablesforpost - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+</xsoap>
+</pre>
+
+==== tablesforpost - Response ====
+
+<pre>
+<xsoap>
+	<array_object_1>
+		<id></id>
+		<table></table>
+	</array_object_1>
+	<array_object_2>
+		<id></id>
+		<table></table>
+	</array_object_2>
+	...
+</xsoap>
+</pre>
+
+=== tablesforupdate - Function ===
+
+'''tablesforupdate''' is a a SOAP function that retrieves the tables that can be updated on the service for data submission to the database
+
+==== tablesforupdate - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+</xsoap>
+</pre>
+
+==== tablesforupdate - Response ====
+
+<pre>
+<xsoap>
+	<array_object_1>
+		<id></id>
+		<table></table>
+	</array_object_1>
+	<array_object_2>
+		<id></id>
+		<table></table>
+	</array_object_2>
+	...
+</xsoap>
+</pre>
+
+=== tablesforretrieve - Function ===
+
+'''tablesforretrieve''' is a a SOAP function that retrieves the tables that can be seen on the service for data retrieval from the database
+
+==== tablesforretrieve - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+</xsoap>
+</pre>
+
+==== tablesforretrieve - Response ====
+
+<pre>
+<xsoap>
+	<array_object_1>
+		<id></id>
+		<table></table>
+	</array_object_1>
+	<array_object_2>
+		<id></id>
+		<table></table>
+	</array_object_2>
+	...
+</xsoap>
+</pre>
+
+=== tableschemer - Function ===
+
+'''tableschemer''' is a a SOAP function that retrieves the a tables schemer that can be seen on the service 
+
+==== tablesforretrieve - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<update></update>
+	<post></post>
+	<retrieve></retrieve>
+	<tablename></tablename>
+</xsoap>
+</pre>
+
+==== tablesforretrieve - Response ====
+
+<pre>
+<xsoap>
+	<array_object_1>
+		<table_id></table_id>
+		<field></field>
+		<allowpost></allowpost>
+		<allowretrieve></allowretrieve>
+		<allowupdate></allowupdate>
+		<string></string>
+		<int></int>
+		<float></float>
+		<text></text>
+		<other></other>
+		<key></key>
+	</array_object_1>
+	<array_object_2>
+		<table_id></table_id>
+		<field></field>
+		<allowpost></allowpost>
+		<allowretrieve></allowretrieve>
+		<allowupdate></allowupdate>
+		<string></string>
+		<int></int>
+		<float></float>
+		<text></text>
+		<other></other>
+		<key></key>
+	</array_object_2>
+	...
+</xsoap>
+</pre>
+
+
+=== post - Function ===
+
+'''post''' is a a SOAP function that insert a record in a tables that can be posted to on the service 
+
+==== post - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<tablename></tablename>
+	<data>
+		<array_object_1>
+			<field></field>
+			<value></value>
+		</array_object_1>
+		<array_object_2>
+			<field></field>
+			<value></value>
+		</array_object_2>
+		...
+	</data>
+</xsoap>
+</pre>
+
+==== post - Response ====
+
+<pre>
+<xsoap>
+	<insert_id></insert_id>
+</xsoap>
+</pre>
+
+=== retrieve - Function ===
+
+'''retrieve''' is a a SOAP function that select a record or group of records in a tables that can be retrieved off the service 
+
+==== retrieve - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<tablename></tablename>
+	<clause></clause>
+	<data>
+		<array_object_1>
+			<field></field>
+		</array_object_1>
+		<array_object_2>
+			<field></field>
+		</array_object_2>
+		...
+	</data>
+</xsoap>
+</pre>
+
+==== retrieve - Response ====
+
+<pre>
+<xsoap>
+	<total_records></total_records>
+	<data>
+		<record_1>
+			<array_object_1>
+				<field></field>
+				<value></value>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<value></value>
+			</array_object_2>
+			...
+		</record_1>
+		<record_2>
+			<array_object_1>
+				<field></field>
+				<value></value>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<value></value>
+			</array_object_2>
+			...
+		</record_2>
+		...
+	</data>
+
+</xsoap>
+</pre>
+
+
+=== update - Function ===
+
+'''post''' is a a SOAP function that update a record in a tables that can be posted to on the service you must have the primary key set.
+
+==== update - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<tablename></tablename>
+	<data>
+		<array_object_1>
+			<field></field>
+			<value></value>
+		</array_object_1>
+		<array_object_2>
+			<field></field>
+			<value></value>
+		</array_object_2>
+		...
+	</data>
+</xsoap>
+</pre>
+
+==== update - Response ====
+
+<pre>
+<xsoap>
+	<result></result>
+</xsoap>
+</pre>
+
+=== retrievekeys - Function ===
+
+'''retrievekeys''' is a a SOAP function that select a record or group of records in a tables that can be retrieved off the service 
+
+==== retrievekeys - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<tablename></tablename>
+	<clause></clause>
+</xsoap>
+</pre>
+
+==== retrievekeys - Response ====
+
+<pre>
+<xsoap>
+	<data>
+		<record_1>
+			<array_object_1>
+				<field></field>
+				<value></value>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<value></value>
+			</array_object_2>
+			...
+		</record_1>
+		<record_2>
+			<array_object_1>
+				<field></field>
+				<value></value>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<value></value>
+			</array_object_2>
+			...
+		</record_2>
+		...
+	</data>
+</xsoap>
+</pre>
+
+=== retrievecrc - Function ===
+
+'''retrievecrc''' is a a SOAP function that select a record or group of records in a tables that can be retrieved off the service 
+
+==== retrievecrc - Request ====
+
+<pre>
+<xsoap>
+	<username></username>
+	<password></password>
+	<tablename></tablename>
+	<clause></clause>
+</xsoap>
+</pre>
+
+==== retrievecrc - Response ====
+
+<pre>
+<xsoap>
+	<data>
+		<record_1>
+			<id></id>
+			<crc></crc>
+			<array_object_1>
+				<field></field>
+				<crc></crc>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<crc></crc>
+			</array_object_2>
+			...
+		</record_1>
+		<record_2>
+			<id></id>
+			<crc></crc>
+			<array_object_1>
+				<field></field>
+				<crc></crc>
+			</array_object_1>
+			<array_object_2>
+				<field></field>
+				<crc></crc>
+			</array_object_2>
+			...
+		</record_2>
+		...
+	</data>
+</xsoap>
+</pre>
