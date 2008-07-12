@@ -26,8 +26,8 @@
 
 
 $modversion['name']		    = 'x-Soap';
-$modversion['version']		= 3.0;
-$modversion['releasedate'] = "Wed: 15 March 2008";
+$modversion['version']		= 3.9;
+$modversion['releasedate'] = "Wed: 4 July 2008";
 $modversion['status'] = "Stable";
 $modversion['author'] = "Chronolabs Australia";
 $modversion['credits'] = "Simon Roberts";

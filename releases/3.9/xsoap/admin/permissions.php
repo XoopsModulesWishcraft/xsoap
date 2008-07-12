@@ -37,7 +37,7 @@ switch ($op) {
                 $form_view = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "plugin_call", "<img id='toptableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/close12.gif alt='' /></a>" . _X_SOAP_PERMISSIONSVIEWMAN . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _X_SOAP_VIEW_FUNCTION . "</span>");
                 $block_view[] = $item_list_view;
                 foreach ($block_view as $itemlists) {
-                    $form_view->addItem($itemlists['cid'], $myts->displayTarea($itemlists['title']));
+                    $form_view->addItem($itemlists['cid'], $itemlists['title']);
                 } 
             } 
             echo $form_view->render();

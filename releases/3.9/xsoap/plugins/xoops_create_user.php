@@ -2,6 +2,7 @@
 
 	include(XOOPS_ROOT_PATH.'/modules/xsoap/plugins/inc/usercheck.php');
 	include(XOOPS_ROOT_PATH.'/modules/xsoap/plugins/inc/authcheck.php');	
+	include(XOOPS_ROOT_PATH.'/modules/xsoap/plugins/inc/siteinfocheck.php');		
 	include(XOOPS_ROOT_PATH.'/class/xoopsmailer.php');
 	include(XOOPS_ROOT_PATH.'/class/xoopsuser.php');
 	
@@ -68,11 +69,12 @@
 			${$k} = $l;
 		}
 		
+
 		$siteinfo = check_siteinfo($siteinfo);
-		
+
 		include_once XOOPS_ROOT_PATH.'/class/auth/authfactory.php';
 		include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/auth.php';
-		$xoopsAuth =& XoopsAuthFactory::getAuthConnection($myts->addSlashes($uname));
+		$xoopsAuth =& XoopsAuthFactory::getAuthConnection($uname);
 
 		if (check_auth_class($xoopsAuth)==true){
 			
@@ -113,14 +115,14 @@
 				}
 		
 				if (!$member_handler->insertUser($newuser, true)) {
-					$return = array('id' => 1, "text" => _US_REGISTERNG);
+					$return = array('state' => 1, "text" => _US_REGISTERNG);
 				} else {
 					$newid = $newuser->getVar('uid');
 					if (!$member_handler->addUserToGroup(XOOPS_GROUP_USERS, $newid)) {
-						$return = array('id' => 1, "text" => _US_REGISTERNG);
+						$return = array('state' => 1, "text" => _US_REGISTERNG);
 					}
 					if ($xoopsConfigUser['activation_type'] == 1) {
-						$return = array('id' => 2,  "user" => $uname);
+						$return = array('state' => 2,  "user" => $uname);
 					}
 					// Sending notification email to user for self activation
 					if ($xoopsConfigUser['activation_type'] == 0) {
@@ -138,9 +140,9 @@
 						$xoopsMailer->setFromName($siteinfo['sitename']);
 						$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $uname));
 						if ( !$xoopsMailer->send() ) {
-							$return = array('id' => 1, "text" => _US_YOURREGMAILNG);
+							$return = array('state' => 1, "text" => _US_YOURREGMAILNG);
 						} else {
-							$return = array('id' => 1, "text" => _US_YOURREGISTERED);
+							$return = array('state' => 1, "text" => _US_YOURREGISTERED);
 						}
 					// Sending notification email to administrator for activation
 					} elseif ($xoopsConfigUser['activation_type'] == 2) {
@@ -166,9 +168,9 @@
 						$xoopsMailer->setFromName($siteinfo['sitename']);
 						$xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $uname));
 						if ( !$xoopsMailer->send() ) {
-							$return = array('id' => 1, "text" => _US_YOURREGMAILNG);
+							$return = array('state' => 1, "text" => _US_YOURREGMAILNG);
 						} else {
-							$return = array('id' => 1, "text" => _US_YOURREGISTERED2);
+							$return = array('state' => 1, "text" => _US_YOURREGISTERED2);
 						}
 					}
 					if ($xoopsConfigUser['new_user_notify'] == 1 && !empty($xoopsConfigUser['new_user_notify_group'])) {
@@ -185,16 +187,13 @@
 						$xoopsMailer->setBody(sprintf(_US_HASJUSTREG, $uname));
 						$xoopsMailer->send();
 					}
-				}
-						
+										
 				return array("ERRNUM" => 1, "RESULT" => $return);
-			
 			} else {
-	
-				return array("ERRNUM" => 1, "RESULT" => array('id' => 1, 'text' => userCheck($uname, $email, $pass, $pass)));
-	
-			}				
-		}
+
+			return array("ERRNUM" => 1, "RESULT" => array('state' => 1, 'text' => userCheck($uname, $email, $pass, $pass)));
+			}
+		}				
 	}
 
 ?>

@@ -65,7 +65,7 @@
 		
 		include_once XOOPS_ROOT_PATH.'/class/auth/authfactory.php';
 		include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/auth.php';
-		$xoopsAuth =& XoopsAuthFactory::getAuthConnection($myts->addSlashes($uname));
+		$xoopsAuth =& XoopsAuthFactory::getAuthConnection(addslashes($uname));
 
 		if (check_auth_class($xoopsAuth)==true){
 			
